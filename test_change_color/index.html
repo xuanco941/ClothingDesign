@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script>
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        AFRAME.registerComponent('select-and-change-color', {
+            schema: { color: { default: 'black' } },
+            init: function () {
+                let data = this.data;
+                let el = this.el;
+                //add event
+                el.addEventListener('click', (e) => {
+                    // Grab the mesh / scene.
+                    const obj = this.el.getObject3D('mesh');
+                    console.log(obj)
+                    // Go over the submeshes and modify materials we want.
+                    let color = getRandomColor();
+                    obj.traverse(node => {
+                        if (node && node.material) {
+                            node.material.color.set(color);
+                        }
+                    });
+                });
+
+                el.addEventListener('model-loaded', (e) => {
+                    let mesh = el.getObject3D('mesh').children[0];
+                    // Tạo texture từ hình ảnh
+                    var textureLoader = new THREE.TextureLoader();
+                    textureLoader.load('./negx.jpg', function (texture) {
+                        // Sử dụng texture để tạo vật liệu phản chiếu
+                        var material = new THREE.MeshBasicMaterial({ map: texture });
+
+                        // Gán vật liệu mới cho mesh
+                        mesh.traverse(node => {
+                            if (node.isMesh) {
+                                node.material = material;
+                            }
+                        });
+                    });
+                })
+            },
+            update: function () { },
+            tick: function () { },
+            remove: function () { },
+            pause: function () { },
+            play: function () { }
+        });
+    </script>
+</head>
+
+<body>
+    <a-scene stats background="color: #FAFAFA" cursor="rayOrigin:mouse" raycaster="objects: [data-raycastable]">
+        <a-assets>
+            <a-asset-item id="short" src="./shirt_baked.glb"></a-asset-item>
+            <a-asset-item id="short2" src="./ponder_rickey_clothing.glb"></a-asset-item>
+            <a-asset-item id="obj" src="./store_in_the_mall.glb"></a-asset-item>
+        </a-assets>
+        <a-gltf-model data-raycastable gltf-model="#short" position="1 2 -5" select-and-change-color></a-gltf-model>
+
+        <a-gltf-model data-raycastable gltf-model="#short2" position="1 2 -2" select-and-change-color></a-gltf-model>
+
+        <a-gltf-model data-raycastable gltf-model="#obj"></a-gltf-model>
+
+
+        
+    </a-scene>
+
+</body>
+
+</html>
