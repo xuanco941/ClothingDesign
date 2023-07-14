@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Change Object Color with Image</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.min.js" integrity="sha512-n8IpKWzDnBOcBhRlHirMZOUvEq2bLRMuJGjuVqbzUJwtTsgwOgK5aS0c1JA647XWYfqvXve8k3PtZdzpipFjgg==" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+        // Tạo scene, camera và renderer
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Tạo loader cho file .glb
+        var loader = new THREE.GLTFLoader();
+
+        // Tải file .glb
+        loader.load('./shirt_baked.glb', function (gltf) {
+            // Lấy mesh từ file .glb
+            var mesh = gltf.scene.children[0];
+
+            // Tạo texture từ hình ảnh
+            var textureLoader = new THREE.TextureLoader();
+            textureLoader.load('./react.png', function (texture) {
+                // Sử dụng texture để tạo vật liệu phản chiếu
+                var material = new THREE.MeshBasicMaterial({ map: texture });
+
+                // Gán vật liệu mới cho mesh
+                mesh.material = material;
+            });
+
+            // Thêm mesh vào scene
+            scene.add(mesh);
+        });
+
+        // Đặt vị trí camera
+        camera.position.z = 5;
+
+        // Hàm lặp để vẽ frame
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+
+        // Gọi hàm animate để bắt đầu vẽ frame
+        animate();
+
+    </script>
+</body>
+
+</html>
