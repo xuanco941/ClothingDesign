@@ -6,32 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
     <script src="./script.js"></script>
 </head>
 
 <body>
-    <a-scene stats background="color: #FAFAFA" cursor="rayOrigin:mouse" raycaster="objects: [data-raycastable]">
+    <a-scene background="color: #333333" cursor="rayOrigin:mouse" raycaster="objects: [data-raycastable]">
         <a-assets>
             <a-asset-item id="short" src="./shirt_baked.glb"></a-asset-item>
             <a-asset-item id="short2" src="./ponder_rickey_clothing.glb"></a-asset-item>
-            <a-asset-item id="obj" src="./store_in_the_mall.glb"></a-asset-item>
+            <a-asset-item id="obj" src="./studio_room.glb"></a-asset-item>
+            <a-asset-item id="obj2" src="./store_mannequin2.glb"></a-asset-item>
+
         </a-assets>
-        <a-gltf-model data-raycastable gltf-model="#short" position="1 2 5" scale="2 2 2"
-            select-and-change-color></a-gltf-model>
 
-        <a-gltf-model data-raycastable gltf-model="#short2" position="1 2 -2" select-and-change-color></a-gltf-model>
+        <a-sky src="./negx.jpg">
 
-        <a-gltf-model gltf-model="#obj" change-size></a-gltf-model>
+        </a-sky>
 
-        <a-entity geometry="primitive: box" position="5 5 5" material="color: black" scale="5 5 5">
-            <a-entity text="value: Hello World;"></a-entity>
-        </a-entity>
-
-        
+        <!-- <a-gltf-model data-raycastable gltf-model="#short" position="1 2 5" scale="2 2 2"
+            select-and-change-color></a-gltf-model> -->
 
 
+        <a-gltf-model gltf-model="#obj" light="type: ambient; color: #fff; intensity: 0.7">
+            <a-entity position="3 0 0">
+                <a-gltf-model data-raycastable gltf-model="#short2" position="-0.5 0 0" rotation="0 180 0"
+                    scale="0.2 0.2 0.2" select-and-change-color>
+                </a-gltf-model>
+                <a-gltf-model gltf-model="#obj2" position="0 0 0">
+                </a-gltf-model>
+            </a-entity>
+            <a-camera wasd-controls="fly: true;"></a-camera>
+        </a-gltf-model>
 
 
+        <!-- <a-entity layout="type: line; margin: 1">
+            <a-box position="0 5 6"></a-box>
+            <a-box position="2 5 6"></a-box>
+            <a-box position="0 5 6"></a-box>
+          </a-entity> -->
     </a-scene>
 
 </body>
