@@ -11,41 +11,46 @@
 </head>
 
 <body>
-    <a-scene background="color: #333333" cursor="rayOrigin:mouse" raycaster="objects: [data-raycastable]">
-        <a-assets>
-            <a-asset-item id="short" src="./shirt_baked.glb"></a-asset-item>
-            <a-asset-item id="short2" src="./ponder_rickey_clothing.glb"></a-asset-item>
-            <a-asset-item id="obj" src="./studio_room.glb"></a-asset-item>
-            <a-asset-item id="obj2" src="./store_mannequin2.glb"></a-asset-item>
+    <div style="display: flex; justify-content: space-between;">
+        <div style="width: 50%; height: 500px;">
+            <a-scene embedded style="max-width: 100%; max-height: 100%;" background="color: #333333" cursor="rayOrigin:mouse" raycaster="objects: [data-raycastable]">
+                <a-assets>
+                    <a-asset-item id="short" src="./shirt_baked.glb"></a-asset-item>
+                    <a-asset-item id="short2" src="./ponder_rickey_clothing.glb"></a-asset-item>
+                    <a-asset-item id="obj" src="./art_gallery.glb"></a-asset-item>
+                    <a-asset-item id="obj2" src="./store_mannequin2.glb"></a-asset-item>
 
-        </a-assets>
+                </a-assets>
 
-        <a-sky src="./negx.jpg">
+                <a-sky src="./negx.jpg">
 
-        </a-sky>
+                </a-sky>
 
-        <!-- <a-gltf-model data-raycastable gltf-model="#short" position="1 2 5" scale="2 2 2"
-            select-and-change-color></a-gltf-model> -->
+                <!-- <a-gltf-model data-raycastable gltf-model="#short" position="1 2 5" scale="2 2 2"
+                select-and-change-color></a-gltf-model> -->
 
 
-        <a-gltf-model gltf-model="#obj" light="type: ambient; color: #fff; intensity: 0.7">
-            <a-entity position="3 0 0">
-                <a-gltf-model data-raycastable gltf-model="#short2" position="-0.5 0 0" rotation="0 180 0"
-                    scale="0.2 0.2 0.2" select-and-change-color>
+                <a-gltf-model gltf-model="#obj" light="type: ambient; color: #fff; intensity: 0.7">
+                    <a-entity position="3 0 0">
+                        <a-gltf-model data-raycastable gltf-model="#short2" position="-0.5 0 0" rotation="0 180 0"
+                            scale="0.2 0.2 0.2" select-and-change-color>
+                        </a-gltf-model>
+                        <a-gltf-model gltf-model="#obj2" position="0 0 0">
+                        </a-gltf-model>
+                    </a-entity>
+                    <a-camera wasd-controls="fly: false;"></a-camera>
                 </a-gltf-model>
-                <a-gltf-model gltf-model="#obj2" position="0 0 0">
-                </a-gltf-model>
-            </a-entity>
-            <a-camera wasd-controls="fly: true;"></a-camera>
-        </a-gltf-model>
 
 
-        <!-- <a-entity layout="type: line; margin: 1">
-            <a-box position="0 5 6"></a-box>
-            <a-box position="2 5 6"></a-box>
-            <a-box position="0 5 6"></a-box>
-          </a-entity> -->
-    </a-scene>
+                <!-- <a-entity layout="type: line; margin: 1">
+                <a-box position="0 5 6"></a-box>
+                <a-box position="2 5 6"></a-box>
+                <a-box position="0 5 6"></a-box>
+              </a-entity> -->
+            </a-scene>
+        </div>
+        <div style="width: 50%;"></div>
+    </div>
 
 </body>
 
